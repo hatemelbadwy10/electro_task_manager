@@ -9,10 +9,10 @@ import '../features/auth/presentation/view/screens/login_screen.dart';
 import '../features/auth/presentation/view/screens/register_screen.dart';
 import '../features/profile/presentation/controller/profile_cubit.dart';
 import '../features/profile/presentation/view/screens/profile_settings_screen.dart';
-import '../features/projects/data/models/project_model.dart';
 import '../features/projects/presentation/controller/projects_cubit.dart';
 import '../features/projects/presentation/view/screens/projects_home_screen.dart';
 import '../features/splash/presentation/view/screens/splash_screen.dart';
+import '../features/tasks/presentation/args/project_details_args.dart';
 import '../features/tasks/presentation/controller/tasks_cubit.dart';
 import '../features/tasks/presentation/view/screens/project_details_screen.dart';
 
@@ -57,10 +57,15 @@ class CommonRouter extends BaseRouter {
         path: AppRoutes.projectDetails.path,
         builder: (context, state) {
           final projectId = state.pathParameters['projectId']!;
-          final project = state.extra as ProjectModel?;
+          final args = state.extra as ProjectDetailsArgs?;
+
           return BlocProvider(
             create: (_) => sl<TasksCubit>(param1: projectId)..loadTasks(),
-            child: ProjectDetailsScreen(projectId: projectId, project: project),
+            child: ProjectDetailsScreen(
+              projectId: projectId,
+              project: args?.project,
+              onProjectSaved: args?.onProjectSaved,
+            ),
           );
         },
       ),

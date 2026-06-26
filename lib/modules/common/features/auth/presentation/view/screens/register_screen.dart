@@ -11,6 +11,8 @@ import '../../../../../../../core/widgets/buttons/custom_button.dart';
 import '../../../../../../../core/widgets/custom_page.dart';
 import '../../../../../../../core/widgets/custom_surface.dart';
 import '../../../../../../../core/widgets/custom_text_field.dart';
+import '../../../../../../../core/resources/locale_keys.g.dart';
+import 'package:easy_localization/easy_localization.dart';
 import '../../controller/auth_cubit.dart';
 import '../../controller/auth_state.dart';
 
@@ -60,30 +62,58 @@ class _RegisterScreenState extends State<RegisterScreen> {
         }
 
         return Scaffold(
-          appBar: AppBar(
-            leading: IconButton(
-              onPressed: AppRoutes.login.go,
-              icon: const Icon(Icons.arrow_back_rounded),
-            ),
-          ),
           body: CustomPage(
             child: SafeArea(
               child: ListView(
                 padding: const EdgeInsets.all(24),
                 children: [
-                  Text(
-                    'Create account',
-                    style: Theme.of(context).textTheme.headlineLarge,
+                  Row(
+                    children: [
+                      IconButton(
+                        onPressed: AppRoutes.login.go,
+                        icon: const Icon(Icons.arrow_back_rounded),
+                        style: IconButton.styleFrom(
+                          backgroundColor: AppColors.surface,
+                          padding: const EdgeInsets.all(12),
+                        ),
+                      ),
+                    ],
                   ),
-                  const SizedBox(height: 8),
-                  Text(
-                    'Start tracking projects with a secure login.',
-                    style: Theme.of(
-                      context,
-                    ).textTheme.bodyLarge?.copyWith(color: AppColors.textMuted),
+                  const SizedBox(height: 12),
+                  Center(
+                    child: Container(
+                      padding: const EdgeInsets.all(16),
+                      decoration: BoxDecoration(
+                        color: AppColors.primary.withValues(alpha: 0.1),
+                        shape: BoxShape.circle,
+                      ),
+                      child: const Icon(
+                        Icons.person_add_rounded,
+                        size: 40,
+                        color: AppColors.primary,
+                      ),
+                    ),
                   ),
-                  const SizedBox(height: 28),
+                  const SizedBox(height: 24),
+                  Text(
+                    LocaleKeys.auth_create_account.tr(),
+                    style: Theme.of(context).textTheme.headlineLarge?.copyWith(
+                          fontWeight: FontWeight.w900,
+                        ),
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(height: 12),
+                  Text(
+                    LocaleKeys.auth_register_subtitle.tr(),
+                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                          color: AppColors.textMuted,
+                          height: 1.4,
+                        ),
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(height: 36),
                   CustomSurface(
+                    padding: const EdgeInsets.all(24),
                     child: AutofillGroup(
                       child: Form(
                         key: _formKey,
@@ -92,18 +122,22 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           children: [
                             CustomTextField(
                               controller: _nameController,
-                              label: 'Name',
+                              label: LocaleKeys.auth_name.tr(),
+                              hint: LocaleKeys.auth_name_hint.tr(),
                               icon: Icons.person_outline_rounded,
                               textInputAction: TextInputAction.next,
                               autofillHints: const [AutofillHints.name],
                               textCapitalization: TextCapitalization.words,
-                              validator: (value) =>
-                                  Validator.required(value, 'Name'),
+                              validator: (value) => Validator.required(
+                                value,
+                                LocaleKeys.auth_name.tr(),
+                              ),
                             ),
                             const SizedBox(height: 14),
                             CustomTextField(
                               controller: _emailController,
-                              label: 'Email',
+                              label: LocaleKeys.auth_email.tr(),
+                              hint: LocaleKeys.auth_email_hint.tr(),
                               icon: Icons.mail_outline_rounded,
                               keyboardType: TextInputType.emailAddress,
                               textInputAction: TextInputAction.next,
@@ -116,7 +150,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             const SizedBox(height: 14),
                             CustomTextField(
                               controller: _passwordController,
-                              label: 'Password',
+                              label: LocaleKeys.auth_password.tr(),
+                              hint: LocaleKeys.auth_password_hint.tr(),
                               icon: Icons.lock_outline_rounded,
                               obscureText: true,
                               textInputAction: TextInputAction.done,
@@ -126,7 +161,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             ),
                             const SizedBox(height: 22),
                             CustomButton(
-                              label: 'Create account',
+                              label: LocaleKeys.auth_create_account.tr(),
                               icon: Icons.check_rounded,
                               isLoading: isLoading,
                               onPressed: submit,

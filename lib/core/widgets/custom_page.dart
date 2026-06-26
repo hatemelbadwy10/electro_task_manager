@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../config/theme/app_colors.dart';
+import '../config/theme/app_colors_extension.dart';
 
 class CustomPage extends StatelessWidget {
   final Widget child;
@@ -10,12 +11,13 @@ class CustomPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.appColors;
     return DecoratedBox(
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         gradient: LinearGradient(
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
-          colors: [Color(0xFFF4F6FF), AppColors.background, Color(0xFFFFFFFF)],
+          colors: colors.pageGradientColors,
         ),
       ),
       child: Stack(
@@ -25,7 +27,9 @@ class CustomPage extends StatelessWidget {
               top: -90,
               right: -88,
               child: _BlurCircle(
-                color: AppColors.primary.withValues(alpha: 0.14),
+                color: AppColors.primary.withValues(
+                  alpha: colors.accentCircleAlpha,
+                ),
                 size: 260,
               ),
             ),
@@ -33,7 +37,7 @@ class CustomPage extends StatelessWidget {
               top: 130,
               left: -110,
               child: _BlurCircle(
-                color: AppColors.lavenderDeep.withValues(alpha: 0.7),
+                color: colors.accentCircleColor,
                 size: 220,
               ),
             ),

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../config/theme/app_colors.dart';
+import '../resources/locale_keys.g.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'custom_animated_container.dart';
 
 class CustomTextField extends StatefulWidget {
@@ -172,7 +174,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
     return IconButton(
       visualDensity: VisualDensity.compact,
       padding: EdgeInsets.zero,
-      tooltip: _obscured ? 'Show password' : 'Hide password',
+      tooltip: _obscured ? LocaleKeys.common_show_password.tr() : LocaleKeys.common_hide_password.tr(),
       onPressed: () => setState(() => _obscured = !_obscured),
       icon: Icon(
         _obscured ? Icons.visibility_outlined : Icons.visibility_off_outlined,

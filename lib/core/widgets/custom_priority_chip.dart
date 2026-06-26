@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../config/theme/app_colors.dart';
+import '../resources/locale_keys.g.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class CustomPriorityChip extends StatelessWidget {
   final String priority;
@@ -22,7 +24,11 @@ class CustomPriorityChip extends StatelessWidget {
         borderRadius: BorderRadius.circular(999),
       ),
       child: Text(
-        priority[0].toUpperCase() + priority.substring(1),
+        switch(priority) {
+          'high' => LocaleKeys.common_priority_high.tr(),
+          'medium' => LocaleKeys.common_priority_medium.tr(),
+          _ => LocaleKeys.common_priority_low.tr(),
+        },
         style: Theme.of(context).textTheme.labelMedium?.copyWith(
           color: color,
           fontWeight: FontWeight.w800,

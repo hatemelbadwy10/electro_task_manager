@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../config/theme/app_colors.dart';
+import '../resources/locale_keys.g.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class CustomStatusChip extends StatelessWidget {
   final String status;
@@ -17,9 +19,9 @@ class CustomStatusChip extends StatelessWidget {
 
     return _PillChip(
       label: switch (status) {
-        'done' => 'COMPLETED',
-        'inProgress' => 'ACTIVE',
-        _ => 'PENDING',
+        'done' => LocaleKeys.common_status_completed.tr(),
+        'inProgress' => LocaleKeys.common_status_active.tr(),
+        _ => LocaleKeys.common_status_pending.tr(),
       },
       color: color,
     );

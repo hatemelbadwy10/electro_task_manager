@@ -24,4 +24,22 @@ class ProjectsRepository {
       status: status,
     );
   }
+
+  Future<ProjectModel> updateProject({
+    required String projectId,
+    String? title,
+    String? description,
+    String? status,
+  }) {
+    return remoteDataSource.updateProject(
+      projectId: projectId,
+      title: title,
+      description: description,
+      status: status,
+    );
+  }
+
+  Future<void> deleteProject(String projectId) {
+    return remoteDataSource.deleteProject(projectId);
+  }
 }

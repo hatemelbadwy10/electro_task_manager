@@ -10,23 +10,28 @@ import '../../../../../../../core/widgets/custom_empty_view.dart';
 import '../../../../../../../core/widgets/custom_error_view.dart';
 import '../../../../../../../core/widgets/custom_loading.dart';
 import '../../../../../../../core/widgets/custom_page.dart';
+import '../../../../../../../core/widgets/list_animator.dart';
+import '../../../../../../../core/resources/locale_keys.g.dart';
+import 'package:easy_localization/easy_localization.dart';
 import '../../controller/projects_cubit.dart';
 import '../../controller/projects_state.dart';
 import '../widgets/add_project_bottom_sheet.dart';
 import '../widgets/project_card.dart';
+import '../../../../tasks/presentation/args/project_details_args.dart';
 
 class ProjectsHomeScreen extends StatelessWidget {
   const ProjectsHomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    context.locale; // Force rebuild on locale change
     return Scaffold(
       appBar: CustomAppBar(
-        title: 'Projects',
+        title: LocaleKeys.projects_title.tr(),
         showBack: false,
         actions: [
           CustomIconButton(
-            tooltip: 'Profile',
+            tooltip: LocaleKeys.profile_title.tr(),
             onTap: AppRoutes.profile.push,
             icon: Icons.person_outline_rounded,
           ),
@@ -43,12 +48,13 @@ class ProjectsHomeScreen extends StatelessWidget {
           builder: (context, state) {
             if (state.status == ProjectsStatus.loading ||
                 state.status == ProjectsStatus.initial) {
-              return const CustomLoading(message: 'Loading projects...');
+              return CustomLoading(message: LocaleKeys.common_loading.tr());
             }
 
             if (state.status == ProjectsStatus.failure) {
               return CustomErrorView(
-                message: state.message ?? 'Could not load projects',
+                message:
+                    state.message ?? LocaleKeys.projects_could_not_load.tr(),
                 onRetry: context.read<ProjectsCubit>().loadProjects,
               );
             }
@@ -56,33 +62,46 @@ class ProjectsHomeScreen extends StatelessWidget {
             return RefreshIndicator.adaptive(
               onRefresh: context.read<ProjectsCubit>().refreshProjects,
               child: state.projects.isEmpty
-                  ? const SingleChildScrollView(
+                  ? SingleChildScrollView(
                       physics: AlwaysScrollableScrollPhysics(),
                       child: SizedBox(
                         height: 520,
                         child: CustomEmptyView(
-                          title: 'No projects yet',
-                          subtitle:
-                              'Projects will appear here when the API returns data.',
+                          title: LocaleKeys.projects_no_projects_yet.tr(),
+                          subtitle: LocaleKeys.projects_no_projects_desc.tr(),
                           icon: Icons.folder_open_rounded,
                         ),
                       ),
                     )
-                  : ListView.separated(
-                      padding: const EdgeInsets.fromLTRB(18, 12, 18, 112),
-                      itemBuilder: (context, index) {
+                  : ListAnimator(
+                      customPadding: const EdgeInsets.fromLTRB(18, 12, 18, 112),
+                      verticalOffset: 34,
+                      horizontalOffset: 24,
+                      data: List.generate(state.projects.length, (index) {
                         final project = state.projects[index];
-                        return ProjectCard(
-                          project: project,
-                          onTap: () => AppRoutes.projectDetails.push(
-                            params: {'projectId': project.id},
-                            extra: project,
+                        return Padding(
+                          padding: const EdgeInsets.only(bottom: 18),
+                          child: ProjectCard(
+                            project: project,
+                            onDelete: () => context
+                                .read<ProjectsCubit>()
+                                .deleteProject(project.id),
+                            onTap: () {
+                              AppRoutes.projectDetails.push(
+                                params: {'projectId': project.id},
+                                extra: ProjectDetailsArgs(
+                                  project: project,
+                                  onProjectSaved: (projectModel) {
+                                    context.read<ProjectsCubit>().syncProject(
+                                      projectModel,
+                                    );
+                                  },
+                                ),
+                              );
+                            },
                           ),
                         );
-                      },
-                      separatorBuilder: (context, index) =>
-                          const SizedBox(height: 18),
-                      itemCount: state.projects.length,
+                      }),
                     ),
             );
           },
@@ -103,7 +122,7 @@ class ProjectsHomeScreen extends StatelessWidget {
         backgroundColor: AppColors.primary,
         foregroundColor: Colors.white,
         icon: const Icon(Icons.add_rounded),
-        label: const Text('Project'),
+        label: Text(LocaleKeys.projects_project.tr()),
       ),
     );
   }

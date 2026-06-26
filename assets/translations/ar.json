@@ -1,0 +1,95 @@
+{
+  "app_name": "إلكترو لإدارة المهام",
+  "app_description": "المشاريع، المهام، والتركيز في مسار عمل واحد نظيف.",
+  "auth": {
+    "welcome_back": "مرحباً بعودتك",
+    "sign_in_subtitle": "سجل الدخول لإدارة مشاريعك ومهامك.",
+    "create_account": "إنشاء حساب",
+    "register_subtitle": "ابدأ في تتبع المشاريع بتسجيل دخول آمن.",
+    "email": "البريد الإلكتروني",
+    "email_hint": "you@example.com",
+    "password": "كلمة المرور",
+    "password_hint": "أدخل كلمة المرور الخاصة بك",
+    "name": "الاسم",
+    "name_hint": "مثال: جون دو",
+    "login": "تسجيل الدخول",
+    "create_new_account": "إنشاء حساب جديد",
+    "login_failed": "فشل تسجيل الدخول",
+    "registration_failed": "فشل التسجيل"
+  },
+  "projects": {
+    "title": "المشاريع",
+    "no_projects_yet": "لا توجد مشاريع بعد",
+    "no_projects_desc": "اضغط على زر + لإنشاء مشروعك الأول.",
+    "project": "مشروع",
+    "view_details": "عرض التفاصيل",
+    "delete": "حذف",
+    "tasks_count": "{} مهام",
+    "add_new_project": "إضافة مشروع جديد",
+    "project_title": "عنوان المشروع",
+    "project_title_hint": "مثال: إعادة تصميم الصفحة الرئيسية",
+    "description": "الوصف",
+    "description_hint": "أضف وصفاً قصيراً للمشروع",
+    "status_pending": "قيد الانتظار",
+    "status_active": "نشط",
+    "status_done": "مكتمل",
+    "create_project": "إنشاء المشروع",
+    "could_not_load": "تعذر تحميل المشاريع",
+    "could_not_create": "تعذر إنشاء المشروع",
+    "could_not_delete": "تعذر حذف المشروع"
+  },
+  "tasks": {
+    "add_new_task": "إضافة مهمة جديدة",
+    "task_title": "عنوان المهمة",
+    "task_title_hint": "مثال: تحديث صورة الغلاف",
+    "priority_low": "منخفض",
+    "priority_medium": "متوسط",
+    "priority_high": "عالي",
+    "add_task": "إضافة مهمة",
+    "mark_done": "تحديد كمكتمل",
+    "delete": "حذف",
+    "no_tasks_yet": "لا توجد مهام بعد",
+    "no_tasks_desc": "اضغط على زر + لإضافة مهمة إلى هذا المشروع.",
+    "could_not_load": "تعذر تحميل المهام",
+    "could_not_add": "تعذر إضافة المهمة",
+    "could_not_update": "تعذر تحديث المهمة",
+    "could_not_delete": "تعذر حذف المهمة"
+  },
+  "profile": {
+    "title": "الملف الشخصي",
+    "loading": "جاري تحميل الملف الشخصي...",
+    "could_not_load": "تعذر تحميل الملف الشخصي",
+    "default_user": "مستخدم",
+    "dark_mode": "الوضع الداكن",
+    "dark_theme": "مظهر داكن",
+    "light_theme": "مظهر فاتح",
+    "api_mode": "وضع API",
+    "api_mode_desc": "تم التكوين باستخدام API_BASE_URL",
+    "logout": "تسجيل الخروج",
+    "language": "اللغة",
+    "arabic": "العربية",
+    "english": "الإنجليزية"
+  },
+  "common": {
+    "loading": "جاري التحميل...",
+    "checking_session": "جاري التحقق من الجلسة...",
+    "retry": "إعادة المحاولة",
+    "show_password": "إظهار كلمة المرور",
+    "hide_password": "إخفاء كلمة المرور",
+    "status": {
+      "completed": "مكتمل",
+      "active": "نشط",
+      "pending": "قيد الانتظار"
+    },
+    "priority": {
+      "high": "عالي",
+      "medium": "متوسط",
+      "low": "منخفض"
+    }
+  },
+  "validation": {
+    "required": "{} مطلوب",
+    "invalid_email": "أدخل عنوان بريد إلكتروني صالح",
+    "password_length": "يجب أن تتكون كلمة المرور من 6 أحرف على الأقل"
+  }
+}

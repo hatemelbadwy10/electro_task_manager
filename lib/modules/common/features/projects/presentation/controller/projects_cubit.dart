@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../../core/data/error/app_exception.dart';
+import '../../data/models/project_model.dart';
 import '../../data/repository/projects_repository.dart';
 import 'projects_state.dart';
 
@@ -44,6 +45,73 @@ class ProjectsCubit extends Cubit<ProjectsState> {
           message: error is AppException
               ? error.message
               : 'Could not create project',
+        ),
+      );
+    }
+  }
+
+  Future<void> deleteProject(String projectId) async {
+    final previousProjects = state.projects;
+    emit(
+      state.copyWith(
+        status: ProjectsStatus.submitting,
+        projects: previousProjects
+            .where((project) => project.id != projectId)
+            .toList(),
+      ),
+    );
+    try {
+      await repository.deleteProject(projectId);
+      emit(state.copyWith(status: ProjectsStatus.success));
+    } catch (error) {
+      emit(
+        state.copyWith(
+          status: ProjectsStatus.failure,
+          projects: previousProjects,
+          message: error is AppException
+              ? error.message
+              : 'Could not delete project',
+        ),
+      );
+    }
+  }
+
+  void updateProjectLocally(ProjectModel updatedProject) {
+    final updatedProjects = state.projects.map((project) {
+      return project.id == updatedProject.id ? updatedProject : project;
+    }).toList();
+
+    emit(
+      state.copyWith(status: ProjectsStatus.success, projects: updatedProjects),
+    );
+  }
+
+  Future<void> syncProject(ProjectModel project) async {
+    try {
+      final updatedProject = await repository.updateProject(
+        projectId: project.id,
+        title: project.title,
+        description: project.description,
+        status: project.status,
+      );
+
+      final updatedProjects = state.projects.map((item) {
+        return item.id == updatedProject.id ? updatedProject : item;
+      }).toList();
+
+      emit(
+        state.copyWith(
+          status: ProjectsStatus.success,
+          projects: updatedProjects,
+        ),
+      );
+    } catch (error) {
+      emit(
+        state.copyWith(
+          status: ProjectsStatus.failure,
+          message: error is AppException
+              ? error.message
+              : 'Could not sync project',
         ),
       );
     }

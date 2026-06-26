@@ -1,0 +1,95 @@
+{
+  "app_name": "Electro Task Manager",
+  "app_description": "Projects, tasks, and focus in one clean workflow.",
+  "auth": {
+    "welcome_back": "Welcome back",
+    "sign_in_subtitle": "Sign in to manage your projects and tasks.",
+    "create_account": "Create account",
+    "register_subtitle": "Start tracking projects with a secure login.",
+    "email": "Email",
+    "email_hint": "you@example.com",
+    "password": "Password",
+    "password_hint": "Enter your password",
+    "name": "Name",
+    "name_hint": "e.g. John Doe",
+    "login": "Login",
+    "create_new_account": "Create a new account",
+    "login_failed": "Login failed",
+    "registration_failed": "Registration failed"
+  },
+  "projects": {
+    "title": "Projects",
+    "no_projects_yet": "No projects yet",
+    "no_projects_desc": "Tap the + button to create your first project.",
+    "project": "Project",
+    "view_details": "View Details",
+    "delete": "Delete",
+    "tasks_count": "{} Tasks",
+    "add_new_project": "Add new project",
+    "project_title": "Project title",
+    "project_title_hint": "e.g. Redesign Homepage",
+    "description": "Description",
+    "description_hint": "Add a short description of the project",
+    "status_pending": "Pending",
+    "status_active": "Active",
+    "status_done": "Done",
+    "create_project": "Create project",
+    "could_not_load": "Could not load projects",
+    "could_not_create": "Could not create project",
+    "could_not_delete": "Could not delete project"
+  },
+  "tasks": {
+    "add_new_task": "Add new task",
+    "task_title": "Task title",
+    "task_title_hint": "e.g. Update hero image",
+    "priority_low": "Low",
+    "priority_medium": "Medium",
+    "priority_high": "High",
+    "add_task": "Add task",
+    "mark_done": "Mark done",
+    "delete": "Delete",
+    "no_tasks_yet": "No tasks yet",
+    "no_tasks_desc": "Tap the + button to add a task to this project.",
+    "could_not_load": "Could not load tasks",
+    "could_not_add": "Could not add task",
+    "could_not_update": "Could not update task",
+    "could_not_delete": "Could not delete task"
+  },
+  "profile": {
+    "title": "Profile",
+    "loading": "Loading profile...",
+    "could_not_load": "Could not load profile",
+    "default_user": "User",
+    "dark_mode": "Dark mode",
+    "dark_theme": "Dark theme",
+    "light_theme": "Light theme",
+    "api_mode": "API mode",
+    "api_mode_desc": "Configured with API_BASE_URL",
+    "logout": "Logout",
+    "language": "Language",
+    "arabic": "Arabic",
+    "english": "English"
+  },
+  "common": {
+    "loading": "Loading...",
+    "checking_session": "Checking session...",
+    "retry": "Retry",
+    "show_password": "Show password",
+    "hide_password": "Hide password",
+    "status": {
+      "completed": "COMPLETED",
+      "active": "ACTIVE",
+      "pending": "PENDING"
+    },
+    "priority": {
+      "high": "High",
+      "medium": "Medium",
+      "low": "Low"
+    }
+  },
+  "validation": {
+    "required": "{} is required",
+    "invalid_email": "Enter a valid email address",
+    "password_length": "Password must be at least 6 characters"
+  }
+}

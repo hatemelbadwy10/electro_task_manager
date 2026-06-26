@@ -19,6 +19,20 @@ class ProjectTaskSummary {
       inProgress: int.tryParse('${json?['inProgress'] ?? 0}') ?? 0,
     );
   }
+
+  ProjectTaskSummary copyWith({
+    int? total,
+    int? done,
+    int? pending,
+    int? inProgress,
+  }) {
+    return ProjectTaskSummary(
+      total: total ?? this.total,
+      done: done ?? this.done,
+      pending: pending ?? this.pending,
+      inProgress: inProgress ?? this.inProgress,
+    );
+  }
 }
 
 class ProjectModel {
@@ -47,6 +61,22 @@ class ProjectModel {
             ? json['taskSummary'] as Map<String, dynamic>
             : null,
       ),
+    );
+  }
+
+  ProjectModel copyWith({
+    String? id,
+    String? title,
+    String? description,
+    String? status,
+    ProjectTaskSummary? summary,
+  }) {
+    return ProjectModel(
+      id: id ?? this.id,
+      title: title ?? this.title,
+      description: description ?? this.description,
+      status: status ?? this.status,
+      summary: summary ?? this.summary,
     );
   }
 }

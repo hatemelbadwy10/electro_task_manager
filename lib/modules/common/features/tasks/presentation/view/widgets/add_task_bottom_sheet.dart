@@ -7,6 +7,8 @@ import '../../../../../../../core/utils/validators.dart';
 import '../../../../../../../core/widgets/buttons/custom_button.dart';
 import '../../../../../../../core/widgets/custom_surface.dart';
 import '../../../../../../../core/widgets/custom_text_field.dart';
+import '../../../../../../../core/resources/locale_keys.g.dart';
+import 'package:easy_localization/easy_localization.dart';
 import '../../controller/tasks_cubit.dart';
 
 class AddTaskBottomSheet extends StatefulWidget {
@@ -58,23 +60,24 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
                 ),
                 const SizedBox(height: 18),
                 Text(
-                  'Add new task',
+                  LocaleKeys.tasks_add_new_task.tr(),
                   style: Theme.of(context).textTheme.titleLarge,
                 ),
                 const SizedBox(height: 16),
                 CustomTextField(
                   controller: _titleController,
-                  label: 'Task title',
+                  label: LocaleKeys.tasks_task_title.tr(),
+                  hint: LocaleKeys.tasks_task_title_hint.tr(),
                   icon: Icons.task_alt_rounded,
                   textInputAction: TextInputAction.done,
-                  validator: (value) => Validator.required(value, 'Task title'),
+                  validator: (value) => Validator.required(value, LocaleKeys.tasks_task_title.tr()),
                   onFieldSubmitted: (_) => _submit(context),
                 ),
                 const SizedBox(height: 14),
                 Row(
                   children: [
                     _PriorityOption(
-                      label: 'Low',
+                      label: LocaleKeys.tasks_priority_low.tr(),
                       value: 'low',
                       selectedValue: _priority,
                       color: AppColors.success,
@@ -82,7 +85,7 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
                     ).expand(),
                     8.gap,
                     _PriorityOption(
-                      label: 'Medium',
+                      label: LocaleKeys.tasks_priority_medium.tr(),
                       value: 'medium',
                       selectedValue: _priority,
                       color: AppColors.warning,
@@ -90,7 +93,7 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
                     ).expand(),
                     8.gap,
                     _PriorityOption(
-                      label: 'High',
+                      label: LocaleKeys.tasks_priority_high.tr(),
                       value: 'high',
                       selectedValue: _priority,
                       color: AppColors.error,
@@ -100,7 +103,7 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
                 ),
                 const SizedBox(height: 18),
                 CustomButton(
-                  label: 'Add task',
+                  label: LocaleKeys.tasks_add_task.tr(),
                   icon: Icons.add_rounded,
                   onPressed: () => _submit(context),
                 ),

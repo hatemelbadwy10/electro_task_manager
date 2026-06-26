@@ -1,3 +1,6 @@
+import '../resources/locale_keys.g.dart';
+import 'package:easy_localization/easy_localization.dart';
+
 class Validator {
   const Validator._();
 
@@ -7,25 +10,25 @@ class Validator {
 
   static String? required(String? value, String fieldName) {
     if (value == null || value.trim().isEmpty) {
-      return '$fieldName is required';
+      return LocaleKeys.validation_required.tr(args: [fieldName]);
     }
     return null;
   }
 
   static String? email(String? value) {
-    final requiredError = required(value, 'Email');
+    final requiredError = required(value, LocaleKeys.auth_email.tr());
     if (requiredError != null) return requiredError;
     if (!_emailRegex.hasMatch(value!.trim())) {
-      return 'Enter a valid email address';
+      return LocaleKeys.validation_invalid_email.tr();
     }
     return null;
   }
 
   static String? password(String? value) {
-    final requiredError = required(value, 'Password');
+    final requiredError = required(value, LocaleKeys.auth_password.tr());
     if (requiredError != null) return requiredError;
     if (value!.length < 6) {
-      return 'Password must be at least 6 characters';
+      return LocaleKeys.validation_password_length.tr();
     }
     return null;
   }

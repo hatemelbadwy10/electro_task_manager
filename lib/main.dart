@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -12,5 +13,14 @@ Future<void> main() async {
   RouteManager.configureRoutes();
   Bloc.observer = AppBlocObserver();
 
-  runApp(const ElectroApp());
+  await EasyLocalization.ensureInitialized();
+
+  runApp(
+    EasyLocalization(
+      supportedLocales: const [Locale('en'), Locale('ar')],
+      path: 'assets/translations',
+      fallbackLocale: const Locale('en'),
+      child: const ElectroApp(),
+    ),
+  );
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../config/theme/app_colors.dart';
+import '../config/theme/app_colors_extension.dart';
 
 class CustomSurface extends StatelessWidget {
   final Widget child;
@@ -16,23 +17,28 @@ class CustomSurface extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.appColors;
     final content = AnimatedContainer(
       duration: const Duration(milliseconds: 180),
       padding: padding,
       decoration: BoxDecoration(
-        color: AppColors.surface.withValues(alpha: 0.92),
+        color: colors.cardSurface,
         borderRadius: BorderRadius.circular(18),
-        border: Border.all(color: Colors.white.withValues(alpha: 0.78)),
+        border: Border.all(color: colors.cardBorder),
         boxShadow: [
           BoxShadow(
             blurRadius: 30,
             offset: const Offset(0, 14),
-            color: AppColors.primary.withValues(alpha: 0.08),
+            color: AppColors.primary.withValues(
+              alpha: colors.cardShadowAlpha,
+            ),
           ),
           BoxShadow(
             blurRadius: 12,
             offset: const Offset(0, 4),
-            color: Colors.black.withValues(alpha: 0.04),
+            color: Colors.black.withValues(
+              alpha: colors.secondaryCardShadowAlpha,
+            ),
           ),
         ],
       ),

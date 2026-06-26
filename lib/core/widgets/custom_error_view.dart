@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../config/theme/app_colors.dart';
+import '../resources/locale_keys.g.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class CustomErrorView extends StatelessWidget {
   final String message;
@@ -32,7 +34,7 @@ class CustomErrorView extends StatelessWidget {
               OutlinedButton.icon(
                 onPressed: onRetry,
                 icon: const Icon(Icons.refresh_rounded),
-                label: const Text('Retry'),
+                label: Text(LocaleKeys.common_retry.tr()),
               ),
             ],
           ],

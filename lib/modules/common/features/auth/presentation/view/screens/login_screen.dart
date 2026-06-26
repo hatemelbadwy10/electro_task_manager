@@ -11,6 +11,8 @@ import '../../../../../../../core/widgets/buttons/custom_button.dart';
 import '../../../../../../../core/widgets/custom_page.dart';
 import '../../../../../../../core/widgets/custom_surface.dart';
 import '../../../../../../../core/widgets/custom_text_field.dart';
+import '../../../../../../../core/resources/locale_keys.g.dart';
+import 'package:easy_localization/easy_localization.dart';
 import '../../controller/auth_cubit.dart';
 import '../../controller/auth_state.dart';
 
@@ -62,29 +64,41 @@ class _LoginScreenState extends State<LoginScreen> {
               child: ListView(
                 padding: const EdgeInsets.all(24),
                 children: [
-                  const SizedBox(height: 28),
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: Image.asset(
-                      'assets/images/electro_task_manager_logo.png',
-                      width: 68,
-                      height: 68,
+                  const SizedBox(height: 12),
+                  Center(
+                    child: Container(
+                      padding: const EdgeInsets.all(16),
+                      decoration: BoxDecoration(
+                        color: AppColors.primary.withValues(alpha: 0.1),
+                        shape: BoxShape.circle,
+                      ),
+                      child: Image.asset(
+                        'assets/images/electro_task_manager_logo.png',
+                        width: 72,
+                        height: 72,
+                      ),
                     ),
                   ),
                   const SizedBox(height: 32),
                   Text(
-                    'Welcome back',
-                    style: Theme.of(context).textTheme.headlineLarge,
+                    LocaleKeys.auth_welcome_back.tr(),
+                    style: Theme.of(context).textTheme.headlineLarge?.copyWith(
+                          fontWeight: FontWeight.w900,
+                        ),
+                    textAlign: TextAlign.center,
                   ),
-                  const SizedBox(height: 8),
+                  const SizedBox(height: 12),
                   Text(
-                    'Sign in to manage your projects and tasks.',
-                    style: Theme.of(
-                      context,
-                    ).textTheme.bodyLarge?.copyWith(color: AppColors.textMuted),
+                    LocaleKeys.auth_sign_in_subtitle.tr(),
+                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                          color: AppColors.textMuted,
+                          height: 1.4,
+                        ),
+                    textAlign: TextAlign.center,
                   ),
-                  const SizedBox(height: 28),
+                  const SizedBox(height: 36),
                   CustomSurface(
+                    padding: const EdgeInsets.all(24),
                     child: AutofillGroup(
                       child: Form(
                         key: _formKey,
@@ -93,8 +107,8 @@ class _LoginScreenState extends State<LoginScreen> {
                           children: [
                             CustomTextField(
                               controller: _emailController,
-                              label: 'Email',
-                              hint: 'you@example.com',
+                              label: LocaleKeys.auth_email.tr(),
+                              hint: LocaleKeys.auth_email_hint.tr(),
                               icon: Icons.mail_outline_rounded,
                               keyboardType: TextInputType.emailAddress,
                               textInputAction: TextInputAction.next,
@@ -107,7 +121,8 @@ class _LoginScreenState extends State<LoginScreen> {
                             const SizedBox(height: 14),
                             CustomTextField(
                               controller: _passwordController,
-                              label: 'Password',
+                              label: LocaleKeys.auth_password.tr(),
+                              hint: LocaleKeys.auth_password_hint.tr(),
                               icon: Icons.lock_outline_rounded,
                               obscureText: true,
                               textInputAction: TextInputAction.done,
@@ -117,7 +132,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                             const SizedBox(height: 22),
                             CustomButton(
-                              label: 'Login',
+                              label: LocaleKeys.auth_login.tr(),
                               icon: Icons.arrow_forward_rounded,
                               isLoading: isLoading,
                               onPressed: submit,
@@ -130,7 +145,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   const SizedBox(height: 18),
                   TextButton(
                     onPressed: AppRoutes.register.go,
-                    child: const Text('Create a new account'),
+                    child: Text(LocaleKeys.auth_create_new_account.tr()),
                   ),
                 ],
               ),

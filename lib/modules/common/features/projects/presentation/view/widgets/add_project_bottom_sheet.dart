@@ -7,6 +7,8 @@ import '../../../../../../../core/utils/validators.dart';
 import '../../../../../../../core/widgets/buttons/custom_button.dart';
 import '../../../../../../../core/widgets/custom_surface.dart';
 import '../../../../../../../core/widgets/custom_text_field.dart';
+import '../../../../../../../core/resources/locale_keys.g.dart';
+import 'package:easy_localization/easy_localization.dart';
 import '../../controller/projects_cubit.dart';
 
 class AddProjectBottomSheet extends StatefulWidget {
@@ -60,34 +62,36 @@ class _AddProjectBottomSheetState extends State<AddProjectBottomSheet> {
                 ),
                 18.gap,
                 Text(
-                  'Add new project',
+                  LocaleKeys.projects_add_new_project.tr(),
                   style: Theme.of(context).textTheme.titleLarge,
                 ),
                 16.gap,
                 CustomTextField(
                   controller: _titleController,
-                  label: 'Project title',
+                  label: LocaleKeys.projects_project_title.tr(),
+                  hint: LocaleKeys.projects_project_title_hint.tr(),
                   icon: Icons.folder_open_rounded,
                   textInputAction: TextInputAction.next,
                   validator: (value) =>
-                      Validator.required(value, 'Project title'),
+                      Validator.required(value, LocaleKeys.projects_project_title.tr()),
                 ),
                 14.gap,
                 CustomTextField(
                   controller: _descriptionController,
-                  label: 'Description',
+                  label: LocaleKeys.projects_description.tr(),
+                  hint: LocaleKeys.projects_description_hint.tr(),
                   icon: Icons.notes_rounded,
                   maxLines: 3,
                   textInputAction: TextInputAction.newline,
                   keyboardType: TextInputType.multiline,
                   validator: (value) =>
-                      Validator.required(value, 'Description'),
+                      Validator.required(value, LocaleKeys.projects_description.tr()),
                 ),
                 14.gap,
                 Row(
                   children: [
                     _StatusOption(
-                      label: 'Pending',
+                      label: LocaleKeys.projects_status_pending.tr(),
                       value: 'pending',
                       selectedValue: _status,
                       color: AppColors.warning,
@@ -95,7 +99,7 @@ class _AddProjectBottomSheetState extends State<AddProjectBottomSheet> {
                     ).expand(),
                     8.gap,
                     _StatusOption(
-                      label: 'Active',
+                      label: LocaleKeys.projects_status_active.tr(),
                       value: 'inProgress',
                       selectedValue: _status,
                       color: AppColors.secondary,
@@ -103,7 +107,7 @@ class _AddProjectBottomSheetState extends State<AddProjectBottomSheet> {
                     ).expand(),
                     8.gap,
                     _StatusOption(
-                      label: 'Done',
+                      label: LocaleKeys.projects_status_done.tr(),
                       value: 'done',
                       selectedValue: _status,
                       color: AppColors.success,
@@ -113,7 +117,7 @@ class _AddProjectBottomSheetState extends State<AddProjectBottomSheet> {
                 ),
                 18.gap,
                 CustomButton(
-                  label: 'Create project',
+                  label: LocaleKeys.projects_create_project.tr(),
                   icon: Icons.add_rounded,
                   onPressed: () => _submit(context),
                 ),

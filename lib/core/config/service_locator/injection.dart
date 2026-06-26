@@ -14,6 +14,7 @@ import '../../../modules/common/features/tasks/data/repository/tasks_repository.
 import '../../../modules/common/features/tasks/presentation/controller/tasks_cubit.dart';
 import '../../data/client/api_client.dart';
 import '../../data/storage/token_storage.dart';
+import '../theme/theme_controller.dart';
 
 final GetIt sl = GetIt.instance;
 
@@ -24,6 +25,10 @@ Future<void> configureDependencies() async {
   sl.registerLazySingleton<TokenStorage>(
     () => TokenStorage(sl<FlutterSecureStorage>()),
   );
+  sl.registerLazySingleton<ThemeController>(
+    () => ThemeController(sl<FlutterSecureStorage>()),
+  );
+  await sl<ThemeController>().loadTheme();
   sl.registerLazySingleton<Dio>(Dio.new);
   sl.registerLazySingleton<ApiClient>(
     () => ApiClient(dio: sl<Dio>(), tokenStorage: sl<TokenStorage>()),

@@ -39,8 +39,14 @@ dependencies:
   go_router: ^16.0.0
   intl: ^0.20.2
   cupertino_icons: ^1.0.8
+  flutter_staggered_animations: ^1.1.1
+  popup_quick_actions:
+    git:
+      url: https://github.com/hatemelbadwy10/quick_actions_popup.git
+  easy_localization: ^3.0.8
 
 dev_dependencies:
+  flutter_launcher_icons: ^0.14.3
   flutter_test:
     sdk: flutter
 
@@ -64,6 +70,7 @@ flutter:
 
   assets:
     - assets/images/
+    - assets/translations/
 
   # To add assets to your application, add an assets section, like this:
   # assets:
@@ -95,3 +102,12 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/images/electro_task_manager_logo.png"
+  min_sdk_android: 21
+  adaptive_icon_background: "#F3F7FB"
+  adaptive_icon_foreground: "assets/images/electro_task_manager_logo.png"
+  remove_alpha_ios: true
