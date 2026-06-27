@@ -48,7 +48,7 @@ popup_quick_actions
 Current stable assets in the repo:
 
 ![App Logo](assets/images/electro_task_manager_logo.png)
-![Auth Screens](assets/readme/auth_screens.png)
+<!-- ![Auth Screens](assets/readme/auth_screens.png) -->
 ![Screen 1](assets/readme/screen_1.png)
 ![Screen 2](assets/readme/screen_2.png)
 ![Screen 3](assets/readme/screen_3.png)
