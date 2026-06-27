@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../../core/data/error/app_exception.dart';
 import '../../data/models/project_model.dart';
 import '../../data/repository/projects_repository.dart';
+import 'projects_filter.dart';
 import 'projects_state.dart';
 
 class ProjectsCubit extends Cubit<ProjectsState> {
@@ -76,14 +77,9 @@ class ProjectsCubit extends Cubit<ProjectsState> {
     }
   }
 
-  void updateProjectLocally(ProjectModel updatedProject) {
-    final updatedProjects = state.projects.map((project) {
-      return project.id == updatedProject.id ? updatedProject : project;
-    }).toList();
-
-    emit(
-      state.copyWith(status: ProjectsStatus.success, projects: updatedProjects),
-    );
+  void changeFilter(ProjectsFilter filter) {
+    if (filter == state.selectedFilter) return;
+    emit(state.copyWith(selectedFilter: filter));
   }
 
   Future<void> syncProject(ProjectModel project) async {

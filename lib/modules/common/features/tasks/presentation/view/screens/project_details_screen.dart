@@ -1,9 +1,10 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../../../core/config/theme/app_colors.dart';
+import '../../../../../../../core/resources/locale_keys.g.dart';
 import '../../../../../../../core/utils/toaster_utils.dart';
-import '../../../../../../../core/utils/project_status_resolver.dart';
 import '../../../../../../../core/widgets/custom_app_bar.dart';
 import '../../../../../../../core/widgets/custom_empty_view.dart';
 import '../../../../../../../core/widgets/custom_error_view.dart';
@@ -11,12 +12,10 @@ import '../../../../../../../core/widgets/custom_loading.dart';
 import '../../../../../../../core/widgets/custom_page.dart';
 import '../../../../../../../core/widgets/custom_surface.dart';
 import '../../../../../../../core/widgets/list_animator.dart';
-import '../../../../../../../core/resources/locale_keys.g.dart';
-import 'package:easy_localization/easy_localization.dart';
 import '../../../../projects/data/models/project_model.dart';
-import '../../../data/models/task_model.dart';
 import '../../controller/tasks_cubit.dart';
 import '../../controller/tasks_state.dart';
+import '../../helpers/project_details_sync_helper.dart';
 import '../widgets/add_task_bottom_sheet.dart';
 import '../widgets/task_card.dart';
 
@@ -45,29 +44,10 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen> {
     _resolvedProject = widget.project;
   }
 
-  void _syncProjectFromTasks(List<TaskModel> tasks) {
-    final project = _resolvedProject;
-    if (project == null) return;
-
-    final nextProject = ProjectStatusResolver.fromTasks(project, tasks);
-    final hasChanged =
-        project.status != nextProject.status ||
-        project.summary.total != nextProject.summary.total ||
-        project.summary.done != nextProject.summary.done ||
-        project.summary.pending != nextProject.summary.pending ||
-        project.summary.inProgress != nextProject.summary.inProgress;
-
-    if (hasChanged) {
-      setState(() {
-        _resolvedProject = nextProject;
-      });
-      widget.onProjectSaved?.call(nextProject);
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
-    context.locale; // Force rebuild on locale change
+    context.locale;
+
     return Scaffold(
       appBar: CustomAppBar(
         title: _resolvedProject?.title ?? LocaleKeys.projects_project.tr(),
@@ -78,7 +58,16 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen> {
             if (state.status == TasksStatus.failure && state.message != null) {
               Toaster.error(state.message!);
             }
-            _syncProjectFromTasks(state.tasks);
+            final syncedProject = ProjectDetailsSyncHelper.resolve(
+              currentProject: _resolvedProject,
+              tasks: state.tasks,
+            );
+            if (syncedProject != null) {
+              setState(() {
+                _resolvedProject = syncedProject;
+              });
+              widget.onProjectSaved?.call(syncedProject);
+            }
           },
           builder: (context, state) {
             if (state.status == TasksStatus.loading ||

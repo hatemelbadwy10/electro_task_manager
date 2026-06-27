@@ -115,16 +115,16 @@ class ProfileSettingsScreen extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 16),
-                CustomSurface(
-                  padding: EdgeInsets.zero,
-                  child: ListTile(
-                    leading: const Icon(Icons.api_rounded),
-                    title: Text(LocaleKeys.profile_api_mode.tr()),
-                    subtitle: Text(LocaleKeys.profile_api_mode_desc.tr()),
-                    trailing: const Icon(Icons.check_circle_rounded),
-                    iconColor: AppColors.primary,
-                  ),
-                ),
+                // CustomSurface(
+                //   padding: EdgeInsets.zero,
+                //   child: ListTile(
+                //     leading: const Icon(Icons.api_rounded),
+                //     title: Text(LocaleKeys.profile_api_mode.tr()),
+                //     subtitle: Text(LocaleKeys.profile_api_mode_desc.tr()),
+                //     trailing: const Icon(Icons.check_circle_rounded),
+                //     iconColor: AppColors.primary,
+                //   ),
+                // ),
                 const SizedBox(height: 16),
                 OutlinedButton.icon(
                   onPressed: () async {

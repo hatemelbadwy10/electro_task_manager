@@ -2,7 +2,7 @@
 
 // ignore_for_file: constant_identifier_names
 
-abstract class  LocaleKeys {
+abstract class LocaleKeys {
   static const app_name = 'app_name';
   static const app_description = 'app_description';
   static const auth_welcome_back = 'auth.welcome_back';
@@ -35,6 +35,10 @@ abstract class  LocaleKeys {
   static const projects_status_pending = 'projects.status_pending';
   static const projects_status_active = 'projects.status_active';
   static const projects_status_done = 'projects.status_done';
+  static const projects_filter_all = 'projects.filter_all';
+  static const projects_filter_completed = 'projects.filter_completed';
+  static const projects_filter_empty = 'projects.filter_empty';
+  static const projects_filter_empty_desc = 'projects.filter_empty_desc';
   static const projects_create_project = 'projects.create_project';
   static const projects_could_not_load = 'projects.could_not_load';
   static const projects_could_not_create = 'projects.could_not_create';
@@ -88,5 +92,4 @@ abstract class  LocaleKeys {
   static const validation_invalid_email = 'validation.invalid_email';
   static const validation_password_length = 'validation.password_length';
   static const validation = 'validation';
-
 }
